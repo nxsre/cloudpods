@@ -208,14 +208,11 @@ github.com/boombuler/barcode/utils
 github.com/bradfitz/iter
 # github.com/c-bata/go-prompt v0.2.1
 github.com/c-bata/go-prompt
-<<<<<<< HEAD
+# github.com/cespare/xxhash/v2 v2.1.1
+github.com/cespare/xxhash/v2
 # github.com/cheggaaa/pb/v3 v3.0.8
 github.com/cheggaaa/pb/v3
 github.com/cheggaaa/pb/v3/termutil
-=======
-# github.com/cespare/xxhash/v2 v2.1.1
-github.com/cespare/xxhash/v2
->>>>>>> cp-k8s-hybrid-v3.8.6
 # github.com/coredns/coredns v1.3.0
 github.com/coredns/coredns/core/dnsserver
 github.com/coredns/coredns/coremain
@@ -619,13 +616,8 @@ github.com/rs/zerolog/internal/json
 github.com/rs/zerolog/log
 # github.com/ryszard/goskiplist v0.0.0-20150312221310-2dfbae5fcf46
 github.com/ryszard/goskiplist/skiplist
-<<<<<<< HEAD
-# github.com/satori/go.uuid v1.2.0
-github.com/satori/go.uuid
 # github.com/sergi/go-diff v1.2.0
 github.com/sergi/go-diff/diffmatchpatch
-=======
->>>>>>> cp-k8s-hybrid-v3.8.6
 # github.com/serialx/hashring v0.0.0-20180504054112-49a4782e9908
 github.com/serialx/hashring
 # github.com/sevlyar/go-daemon v0.1.5

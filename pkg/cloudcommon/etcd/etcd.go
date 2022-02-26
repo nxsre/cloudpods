@@ -21,8 +21,8 @@ import (
 	"sync"
 	"time"
 
-	"go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/mvcc/mvccpb"
+	"go.etcd.io/etcd/api/v3/mvccpb"
+	clientv3 "go.etcd.io/etcd/client/v3"
 	"google.golang.org/grpc"
 
 	"yunion.io/x/log"
@@ -92,7 +92,6 @@ func NewEtcdClient(opt *SEtcdOptions, onKeepaliveFailure func()) (*SEtcdClient, 
 		Username:    opt.EtcdUsername,
 		Password:    opt.EtcdPassword,
 		TLS:         tlsConfig,
-
 		DialOptions: []grpc.DialOption{
 			grpc.WithBlock(),
 		},
@@ -158,7 +157,6 @@ func (cli *SEtcdClient) startSession() error {
 		return err
 	}
 	cli.leaseId = resp.ID
-
 	ch, err := cli.client.KeepAlive(ctx, cli.leaseId)
 	if err != nil {
 		return err
@@ -166,10 +164,12 @@ func (cli *SEtcdClient) startSession() error {
 	cli.leaseLiving = true
 
 	go func() {
+		log.Println(cli.SessionLiving())
+		time.Sleep(3 * time.Second)
 		for {
-			if _, ok := <-ch; !ok {
+			if aa, ok := <-ch; !ok {
 				cli.leaseLiving = false
-				log.Errorf("fail to keepalive session")
+				log.Errorf("fail to keepalive session %+v", aa)
 				if cli.onKeepaliveFailure != nil {
 					cli.onKeepaliveFailure()
 				}

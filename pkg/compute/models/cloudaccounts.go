@@ -2429,6 +2429,7 @@ func guessBrandForHypervisor(hypervisor string) string {
 		log.Errorf("guestBrandFromHypervisor: fail to find brands for hypervisor %s", hypervisor)
 		return ""
 	}
+	log.Println(brands, provider)
 	if len(brands) != 1 {
 		log.Errorf("guestBrandFromHypervisor: find mistached number of brands for hypervisor %s %s", hypervisor, brands)
 		return ""

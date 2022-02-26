@@ -87,7 +87,7 @@ func (sm *SchedulerManager) start() {
 		sm.TaskManager.Run,
 		sm.DataManager.Run,
 		sm.CandidateManager.Run,
-		//sm.KubeClusterManager.Start,
+		sm.KubeClusterManager.Start,
 	}
 	for _, f := range startFuncs {
 		go f()

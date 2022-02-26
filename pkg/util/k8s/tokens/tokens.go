@@ -27,7 +27,6 @@ import (
 	"k8s.io/client-go/rest"
 	bootstrapapi "k8s.io/cluster-bootstrap/token/api"
 	bootstraputil "k8s.io/cluster-bootstrap/token/util"
-
 	"yunion.io/x/jsonutils"
 	"yunion.io/x/log"
 	"yunion.io/x/pkg/errors"

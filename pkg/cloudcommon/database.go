@@ -116,9 +116,9 @@ func initInformer(options *common_options.DBOptions) error {
 	}
 	informerBackend, err := informer.NewEtcdBackend(&etcd.SEtcdOptions{
 		EtcdEndpoint:              options.EtcdEndpoints,
-		EtcdTimeoutSeconds:        5,
+		EtcdTimeoutSeconds:        35,
 		EtcdRequestTimeoutSeconds: 2,
-		EtcdLeaseExpireSeconds:    5,
+		EtcdLeaseExpireSeconds:    25,
 		EtcdEnabldSsl:             options.EtcdUseTLS,
 		TLSConfig:                 tlsCfg,
 	}, nil)

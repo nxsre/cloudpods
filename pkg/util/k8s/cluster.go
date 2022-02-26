@@ -21,7 +21,6 @@ import (
 
 	"k8s.io/client-go/kubernetes"
 
-	"yunion.io/x/jsonutils"
 	"yunion.io/x/log"
 
 	"yunion.io/x/onecloud/pkg/mcclient/auth"
@@ -108,11 +107,16 @@ func (man *SKubeClusterManager) refreshKubeConfig() {
 
 func (man *SKubeClusterManager) getKubeClusterConfig() (string, error) {
 	session := auth.GetAdminSession(context.Background(), man.region, "v1")
-	params := jsonutils.NewDict()
-	params.Add(jsonutils.JSONTrue, "directly")
-	ret, err := kubeserver.KubeClusters.PerformAction(session, "default", "generate-kubeconfig", params)
+	//params := jsonutils.NewDict()
+	//params.Add(jsonutils.JSONTrue, "directly")
+	//ret, err := kubeserver.KubeClusters.PerformAction(session, "default", "generate-kubeconfig", params)
+	ret, err := kubeserver.KubeClusters.GetSpecific(session, "system-default", "kubeconfig", nil)
 	if err != nil {
 		return "", err
 	}
-	return ret.GetString("kubeconfig")
+	conf, err := ret.GetString("kubeconfig")
+	if err != nil {
+		return "", err
+	}
+	return conf, nil
 }

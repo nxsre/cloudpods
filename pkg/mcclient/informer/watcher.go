@@ -70,13 +70,15 @@ func NewWatchManager(client *mcclient.Client, token mcclient.TokenCredential, re
 		EtcdEndpoint:              []string{endpoint.Url},
 		EtcdTimeoutSeconds:        5,
 		EtcdRequestTimeoutSeconds: 10,
-		EtcdLeaseExpireSeconds:    5,
+		EtcdLeaseExpireSeconds:    15,
 	}
 	if tlsCfg != nil {
 		tlsCfg.InsecureSkipVerify = true
 		opt.EtcdEnabldSsl = true
 		opt.TLSConfig = tlsCfg
 	}
+
+	log.Printf("---- %+v", opt)
 	be, err := informer.NewEtcdBackendForClient(opt)
 	if err != nil {
 		return nil, errors.Wrap(err, "new etcd informer backend")

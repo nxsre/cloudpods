@@ -1240,7 +1240,7 @@ func (manager *SGuestManager) validateCreateData(
 		return nil, err
 	}
 
-	optionSystemHypervisor := []string{api.HYPERVISOR_KVM, api.HYPERVISOR_ESXI}
+	optionSystemHypervisor := []string{api.HYPERVISOR_KVM, api.HYPERVISOR_ESXI, api.HYPERVISOR_CONTAINER}
 
 	if !utils.IsInStringArray(input.Hypervisor, optionSystemHypervisor) && len(input.Disks[0].ImageId) == 0 && len(input.Disks[0].SnapshotId) == 0 && input.Cdrom == "" {
 		return nil, httperrors.NewBadRequestError("Miss operating system???")
@@ -3835,7 +3835,10 @@ func (self *SGuest) DeleteAllInstanceSnapshotInDB(ctx context.Context, userCred 
 }
 
 func (self *SGuest) isNeedDoResetPasswd() bool {
-	guestdisks, _ := self.GetGuestDisks()
+	guestdisks, err := self.GetGuestDisks()
+	if err != nil || len(guestdisks) < 1 {
+		return false
+	}
 	disk := guestdisks[0].GetDisk()
 	if len(disk.SnapshotId) > 0 {
 		return false
